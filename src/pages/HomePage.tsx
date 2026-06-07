@@ -1,6 +1,6 @@
 import { useState, useRef, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { LocationInput, type LocationResult } from '../components/LocationInput';
 import { SearchInput } from '../components/SearchInput';
 import { PlatformMarquee } from '../components/PlatformMarquee';
@@ -63,29 +63,13 @@ export function HomePage() {
         <div className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-flow-shell-start/5 blur-3xl pointer-events-none" />
 
         <div className="relative z-10 w-full max-w-5xl mx-auto text-center">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 border border-divider bg-surface/50 backdrop-blur-sm px-4 py-2 rounded-full mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse-optimal flex-shrink-0" />
-            <span className="font-mono text-[10px] tracking-widest uppercase text-text-secondary">
-              India's First Quick Commerce Price Comparator
-            </span>
-          </div>
+         
+          
 
           {/* Headline */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[0.9] tracking-tight mb-6">
-            <span className="block">
-              <TextScramble text="One Search." delay={100} duration={600} />
-            </span>
-            <span className="block text-text-secondary">
-              <TextScramble text="Every Price." delay={350} duration={600} />
-            </span>
-            <span className="block text-accent">
-              <TextScramble text="Instant." delay={600} duration={600} />
-            </span>
-          </h1>
 
           {/* Sub */}
-          <p className="font-mono text-sm sm:text-base text-text-secondary max-w-xl mx-auto mb-12 leading-relaxed">
+          <p className="font-mono text-xs sm:text-sm text-text-secondary max-w-xl  mx-auto mb-6 leading-relaxed">
             Compare real-time prices across Blinkit, Zepto, Instamart & more.
             <br />
             <span className="text-text-hint">Zero fluff. Just the best deal.</span>
@@ -97,52 +81,33 @@ export function HomePage() {
             onSubmit={handleSubmit}
             className="relative w-full max-w-2xl mx-auto"
           >
+            {/* Backdrop glow */}
+            <div className="absolute -inset-12 flex items-center justify-center pointer-events-none opacity-70">
+              <div className="w-3/4 h-3/4 rounded-full bg-accent/20 blur-[90px]" />
+            </div>
+
             {/* Card */}
-            <div className="border border-divider bg-surface/80 backdrop-blur-xl p-6 sm:p-8 flex flex-col gap-5">
+            <div className="relative border border-white/5 bg-surface/80 backdrop-blur-xl p-6 sm:p-8 flex flex-col gap-5 shadow-[0_0_50px_-12px_rgba(233,69,96,0.12),0_8px_40px_-12px_rgba(0,0,0,0.4)]">
               {/* Top accent line */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/60 via-40% to-transparent" />
 
               <LocationInput value={location} onChange={setLocation} />
 
               <div className="relative">
-                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-surface px-3 z-10">
-                  <span className="font-mono text-[9px] tracking-widest text-text-hint uppercase">
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-surface px-4 z-10">
+                  <span className="font-mono text-[10px] leading-none tracking-[0.15em] text-text-hint/50 uppercase">
                     then
                   </span>
                 </div>
-                <div className="border-t border-divider" />
+                <div className="border-t border-divider/60" />
               </div>
 
               <SearchInput
                 value={query}
                 onChange={setQuery}
                 locationLocked={!!location}
+                canSubmit={canSubmit}
               />
-
-              {/* CTA */}
-              <button
-                type="submit"
-                id="compare-submit-btn"
-                disabled={!canSubmit}
-                className={`group w-full flex items-center justify-center gap-3 py-4 font-mono text-sm tracking-widest uppercase transition-all duration-200 ${
-                  canSubmit
-                    ? 'bg-accent text-white hover:bg-accent/90 active:scale-[0.98]'
-                    : 'bg-surface border border-divider text-text-hint cursor-not-allowed'
-                }`}
-              >
-                <span>Compare Prices</span>
-                <ArrowRight
-                  className={`w-4 h-4 transition-transform duration-200 ${canSubmit ? 'group-hover:translate-x-1' : ''}`}
-                  strokeWidth={1.5}
-                />
-              </button>
-
-              {/* Bottom label */}
-              <p className="font-mono text-[10px] text-center text-text-hint tracking-wider">
-                {canSubmit
-                  ? `Searching in ${location!.city ?? location!.label}`
-                  : 'Set location + query to compare →'}
-              </p>
             </div>
           </form>
 
@@ -175,6 +140,23 @@ export function HomePage() {
 
       {/* ── PLATFORM MARQUEE ────────────────────────────────── */}
       <PlatformMarquee />
+
+      <PlatformMarquee />
+
+      <div className="max-w-5xl mt-8 mx-auto text-center px-4 sm:px-8">
+        <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold leading-[0.9] tracking-tight mb-6">
+          <span className="block">
+            <TextScramble text="One Search." delay={100} duration={600} />
+          </span>
+          <span className="block text-text-secondary">
+            <TextScramble text="Every Price." delay={350} duration={600} />
+          </span>
+          <span className="block text-accent">
+            <TextScramble text="Instant." delay={600} duration={600} />
+          </span>
+        </h1>
+      </div>
+
 
       {/* ── HOW IT WORKS ────────────────────────────────────── */}
       <HowItWorks />

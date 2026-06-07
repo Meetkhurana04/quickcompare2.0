@@ -151,7 +151,7 @@ export function LocationInput({ value, onChange }: LocationInputProps) {
   return (
     <div ref={containerRef} className="relative w-full">
       {/* Label */}
-      <label className="block font-mono text-[10px] tracking-widest uppercase text-text-hint mb-2">
+      <label className="block font-mono text-[11px] leading-none tracking-[0.12em] uppercase text-text-hint mb-1.5">
         Your Location
       </label>
 
@@ -215,10 +215,10 @@ export function LocationInput({ value, onChange }: LocationInputProps) {
       </div>
 
       {/* Hint */}
-      <p className="mt-1.5 font-mono text-[10px] text-text-hint">
+      <p className="mt-1.5 font-mono text-[10px] leading-snug text-text-hint">
         {isSelected
-          ? <span className="text-success tracking-wider">✓ LOCATION SET — {value!.lat.toFixed(4)}, {value!.lng.toFixed(4)}</span>
-          : 'Type to search · Select from dropdown only'}
+          ? <span className="text-success/80">✓ {value!.city ?? value!.label}</span>
+          : 'Type to search · select from dropdown only'}
       </p>
 
       {/* Dropdown */}
